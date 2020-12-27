@@ -1,4 +1,74 @@
-fsd334rgd
-rfg46gdfg
-ter5tge56
-123gergf
+program z4;    // на красоту алгоритма пока вообще не претендую..
+               // может через месяц))
+var f1: text;
+    filename, s, chislo: string;
+    a: array [1..30] of string;
+    i, j, str, m, maxGor, maxVert, Code, flag: integer;
+    simv: char;
+
+{procedure FindMax(maxStr, maxStolb: integer; var max: integer);
+begin
+
+end; }
+
+begin
+  filename := 'D:\z4.txt';
+  assign(f1, filename);
+
+  {$I-} reset(f1);  {$I+}
+
+  if IOResult <> 0 then    // если есть ошибки
+  begin
+    writeLn('File ', filename, ' ne naiden!');
+  end else  // если удалось открыть на чтение
+  begin
+    writeLn('File ', filename, ' suchectvuet.');
+    writeln(); writeln();
+
+    str := 0;    // chislo strok
+    while not eof(f1) do
+      begin
+        readln(f1, s);
+        str := str + 1;
+        a[str] := s;
+     end;
+   end;   // а - массив, где каждый элемент - строка из файла
+
+  // работаем по горизонтали
+  maxGor := 0;
+  for i:=1 to str do
+    for j:=1 to 30 do
+      begin
+        simv := a[i][j];
+        Val(simv, m, Code);
+        if Code = 0 then
+          begin
+            chislo := chislo + simv;
+            flag := 1;
+          end
+        else  // element - ne chislo
+          begin
+            if flag = 1 then   // to est' do etogo bili chisla
+              begin
+                Val(chislo, m, Code);
+                if maxGor < m then maxGor := m;
+                chislo := '';
+              end;
+            flag := 0;
+          end;
+        end;
+
+  writeln('Max chislo vo vsem fajle = ', maxGor);
+
+  {// работаем по вертикали
+  maxVert := 0;
+  for j:=1 to 30 do
+    for i:=1 to str do
+      begin
+
+      end; }
+
+  // работает только по горизонтали, хотела сделать процедуру, чтоб запускать
+  // ее отдельно по горизонтали и вертикали, меняя границы диапазонов for
+  readln();
+end.
